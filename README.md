@@ -37,3 +37,34 @@ Install all necessary dependencies listed in `requirements.txt`:
 ```bash
 pip install -r requirements.txt
 ```
+
+
+## MLflow
+
+- [Documentation](https://mlflow.org/docs/latest/index.html)
+
+- [MLflow tutorial](https://youtu.be/qdcHHrsXA48?si=bD5vDS60akNphkem)
+
+##### cmd
+- mlflow ui
+
+### dagshub
+[dagshub](https://dagshub.com/)
+
+MLFLOW_TRACKING_URI=https://dagshub.com/Himanshusinghdev1/Lung-Cancer-Prediction.mlflow \
+MLFLOW_TRACKING_USERNAME=Himanshusinghdev1 \
+MLFLOW_TRACKING_PASSWORD=e663963ebb08452411148b424509dcd751190e6a \
+python script.py
+
+Run this to export as env variables:
+
+```bash
+
+export MLFLOW_TRACKING_URI=https://dagshub.com/Himanshusinghdev1/Lung-Cancer-Prediction.mlflow
+
+export MLFLOW_TRACKING_USERNAME=Himanshusinghdev1 
+
+export MLFLOW_TRACKING_PASSWORD=e663963ebb08452411148b424509dcd751190e6a
+
+```
+
