@@ -1,30 +1,41 @@
+import os
 import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-import os
-
 
 class PredictionPipeline:
     def __init__(self, filename):
         self.filename = filename
 
     def predict(self):
-        # Load model
-        model = load_model(os.path.join("artifacts", "training", "model.h5"))
+        try:
+            # Load the model
+            model_path = os.path.join("model", "model.h5")
+            model = load_model(model_path)
 
-        imagename = self.filename
-        test_image = image.load_img(imagename, target_size=(224, 224))
-        test_image = image.img_to_array(test_image)
-        test_image = np.expand_dims(test_image, axis=0)
-        result = np.argmax(model.predict(test_image), axis=1)
-        print(result)
+            # Load and preprocess the image
+            img = image.load_img(self.filename, target_size=(224, 224))
+            img_array = image.img_to_array(img)
+            img_array = np.expand_dims(img_array, axis=0)
+            img_array = img_array / 255.0  # Normalize
 
-        # Mapping results to three classes
-        if result == 0:
-            prediction = 'Normal'
-        elif result == 1:
-            prediction = 'Benign Tumor'
-        else:
-            prediction = 'Malignant Tumor'
-        
-        return [{"image": prediction}]
+            # Predict
+            prediction = model.predict(img_array)
+            result = np.argmax(prediction, axis=1)
+
+            print("Raw Prediction Output:", prediction)
+
+            # Label map - adjust to match training labels
+            label_map = {
+                0: "Benign",
+                1: "Normal",
+                2: "Malignant"
+            }
+
+            prediction_text = label_map.get(result[0], "Unknown")
+            print(f"Final Prediction: {prediction_text}")
+            return {"image": prediction_text}
+
+        except Exception as e:
+            print(f"Error in PredictionPipeline: {str(e)}")
+            return {"error": str(e)}
