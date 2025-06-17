@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from cnnClassifier.pipeline.prediction import PredictionPipeline
 import os
 
-#app name is app
+
 app = Flask(__name__)
 
 UPLOAD_FOLDER = 'static/uploads'
