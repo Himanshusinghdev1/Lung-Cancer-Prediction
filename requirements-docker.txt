@@ -1,0 +1,21 @@
+tensorflow==2.12.0
+pandas 
+dvc
+mlflow
+numpy
+notebook
+matplotlib
+seaborn
+python-box
+pyYAML
+tqdm
+ensure
+joblib
+types-PyYAML
+scipy
+Flask
+Flask-Cors
+gdown
+pillow
+numpy
+-e .
